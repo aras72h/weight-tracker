@@ -35,6 +35,17 @@ def index():
     return apology("TODO")
 
 
+@app.route("/add", methods=["GET", "POST"])
+@login_required
+def add():
+    if request.method == 'POST':
+        date = request.form.get('date')
+        weight = float(request.form.get('weight'))
+        db.execute('INSERT INTO weights (date, weight) VALUES (?, ?)', date, weight)
+    else:
+        return render_template('add.html')
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
