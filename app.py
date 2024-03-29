@@ -41,7 +41,8 @@ def add():
     if request.method == 'POST':
         date = request.form.get('date')
         weight = float(request.form.get('weight'))
-        db.execute('INSERT INTO weights (date, weight) VALUES (?, ?)', date, weight)
+        db.execute('INSERT INTO weights (user_id, weight, date) VALUES (?, ?, ?)', session['user_id'], weight, date)
+        return redirect('/add')
     else:
         return render_template('add.html')
 
