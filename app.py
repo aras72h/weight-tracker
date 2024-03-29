@@ -47,6 +47,13 @@ def add():
         return render_template('add.html')
 
 
+@app.route("/history", methods=["GET"])
+@login_required
+def history():
+    weights = db.execute('SELECT * FROM weights WHERE user_id = ?', session['user_id'])
+    return render_template('history.html', weights=weights)
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
