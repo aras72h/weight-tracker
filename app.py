@@ -32,7 +32,8 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    return apology("TODO")
+    weights = db.execute('SELECT * FROM weights WHERE user_id = ?', session['user_id'])
+    return render_template('index.html', weights=weights)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -42,7 +43,7 @@ def add():
         date = request.form.get('date')
         weight = float(request.form.get('weight'))
         db.execute('INSERT INTO weights (user_id, weight, date) VALUES (?, ?, ?);', session['user_id'], weight, date)
-        return redirect('/add')
+        return redirect('/')
     else:
         return render_template('add.html')
 
