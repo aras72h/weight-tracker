@@ -1,3 +1,4 @@
+{% from 'macros.html' import add %}
 {% extends 'layout.html' %}
 
 {% block title %}
@@ -5,13 +6,5 @@
 {% endblock %}
 
 {% block main %}
-<form action="/add" method="post">
-    <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="date" placeholder="Da" type="date">
-    </div>
-    <div class="mb-3">
-        <input class="form-control mx-auto w-auto" name="weight" placeholder="Wight(KG)" type="text">
-    </div>
-    <button class="btn btn-primary" type="submit">Save</button>
-</form>
+    {{ add() }}
 {% endblock %}

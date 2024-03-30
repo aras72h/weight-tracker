@@ -1,24 +1,10 @@
+{% from 'macros.html' import history_table %}
 {% extends "layout.html" %}
 
 {% block title %}
     History
 {% endblock %}
-
+    
 {% block main %}
-    <table class="table table-bordered table-striped">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Weight</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for weight in weights %}
-                <tr>
-                    <td>{{ weight.get('date') }}</td>
-                    <td>{{ weight.get('weight') }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {{ history_table(weights) }}
 {% endblock%}

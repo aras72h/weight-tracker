@@ -1,3 +1,4 @@
+{% from 'macros.html' import history_table, add %}
 {% extends 'layout.html' %}
 
 {% block title %}
@@ -5,32 +6,6 @@
 {% endblock %}
 
 {% block main %}
-<form action="/add" method="post">
-    <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
-            name="date" placeholder="Da" type="date">
-    </div>
-    <div class="mb-3">
-        <input class="form-control mx-auto w-auto" name="weight" 
-            placeholder="Wight(KG)" type="text">
-    </div>
-    <button class="btn btn-primary" type="submit">Save</button>
-</form>
-
-<table class="table table-bordered table-striped">
-    <thead class="thead-light">
-        <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Weight</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for weight in weights %}
-            <tr>
-                <td>{{ weight.get('date') }}</td>
-                <td>{{ weight.get('weight') }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    {{ add() }}
+    {{ history_table(weights) }}
 {% endblock main %}
