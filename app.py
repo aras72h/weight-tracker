@@ -32,7 +32,8 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    weights = db.execute('SELECT * FROM weights WHERE user_id = ? ORDER BY date DESC;', session['user_id'])
+    weights = db.execute('SELECT * FROM weights WHERE user_id = ? ORDER BY date DESC;',
+                          session['user_id'])
     return render_template('index.html', weights=weights)
 
 
@@ -42,7 +43,8 @@ def add():
     if request.method == 'POST':
         date = request.form.get('date')
         weight = float(request.form.get('weight'))
-        db.execute('INSERT INTO weights (user_id, weight, date) VALUES (?, ?, ?);', session['user_id'], weight, date)
+        db.execute('INSERT INTO weights (user_id, weight, date) VALUES (?, ?, ?);',
+                    session['user_id'], weight, date)
         return redirect('/')
     else:
         return render_template('add.html')
@@ -51,7 +53,8 @@ def add():
 @app.route("/history", methods=["GET"])
 @login_required
 def history():
-    weights = db.execute('SELECT * FROM weights WHERE user_id = ? ORDER BY date DESC;', session['user_id'])
+    weights = db.execute('SELECT * FROM weights WHERE user_id = ? ORDER BY date DESC;',
+                          session['user_id'])
     return render_template('history.html', weights=weights)
 
 
@@ -72,9 +75,8 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute(
-            "SELECT * FROM users WHERE username = ?;", request.form.get("username")
-        )
+        rows = db.execute("SELECT * FROM users WHERE username = ?;",
+                           request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(
@@ -126,7 +128,8 @@ def register():
                 return apology("confirm your password correctly")
             else:
                 # Insert user info into database
-                db.execute("INSERT INTO users (username, hash) values (?, ?);", username, hash)
+                db.execute("INSERT INTO users (username, hash) values (?, ?);",
+                            username, hash)
                 return redirect("/login")
     else:
         return render_template("register.html")
