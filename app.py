@@ -32,7 +32,7 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    weights = db.execute('SELECT * FROM weights WHERE user_id = ?', session['user_id'])
+    weights = db.execute('SELECT * FROM weights WHERE user_id = ? ORDER BY date DESC;', session['user_id'])
     return render_template('index.html', weights=weights)
 
 
@@ -51,7 +51,7 @@ def add():
 @app.route("/history", methods=["GET"])
 @login_required
 def history():
-    weights = db.execute('SELECT * FROM weights WHERE user_id = ?;', session['user_id'])
+    weights = db.execute('SELECT * FROM weights WHERE user_id = ? ORDER BY date DESC;', session['user_id'])
     return render_template('history.html', weights=weights)
 
 
