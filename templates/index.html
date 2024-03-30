@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<form action="/add" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+            name="date" placeholder="Da" type="date">
+    </div>
+    <div class="mb-3">
+        <input class="form-control mx-auto w-auto" name="weight" 
+            placeholder="Wight(KG)" type="text">
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Weight</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for weight in weights %}
+            <tr>
+                <td>{{ weight.get('date') }}</td>
+                <td>{{ weight.get('weight') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock main %}
