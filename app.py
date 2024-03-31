@@ -68,9 +68,11 @@ def index():
 def add():
     if request.method == 'POST':
         date = request.form.get('date')
-        weight = float(request.form.get('weight'))
+        weight = request.form.get('weight')
+        if not date or not weight:
+            return apology('provide date and weight')
         db.execute('INSERT INTO weights (user_id, weight, date) VALUES (?, ?, ?);',
-                    session['user_id'], weight, date)
+                    session['user_id'], float(weight), date)
         return redirect('/')
     else:
         return render_template('add.html')
