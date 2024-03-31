@@ -1,3 +1,17 @@
+* {
+    /* outline: 1px solid limegreen !important; */
+}
+
+.av- {
+    font-size: 1.2rem;
+    /* font-weight: 700; */
+    /* width: 80%; */
+    /* max-width: 500px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .unify-inputs .form-control {
     width: 70% !important;
     max-width: 400px;
