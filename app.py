@@ -34,7 +34,33 @@ def after_request(response):
 def index():
     weights = db.execute('SELECT * FROM weights WHERE user_id = ? ORDER BY date DESC;',
                           session['user_id'])
-    return render_template('index.html', weights=weights)
+    this_month = int(datetime.now().month)
+    this_year =  int(datetime.now().year)
+    
+    if this_month == 1:
+        last_month = 12
+        this_year -= 1
+    else:
+        last_month = this_month - 1
+
+    date_start = f'{this_year}-{last_month:02d}-01'
+    date_end = f'{this_year}-{last_month:02d}-31'
+
+    # Calculate last month average
+    last_month_avg = db.execute('SELECT avg(weight) AS avg_weight FROM weights WHERE user_id = ? AND date BETWEEN ? AND ?;',
+                                session['user_id'],
+                                date_start,
+                                date_end)
+    avg_last = last_month_avg[0]['avg_weight'] if last_month_avg else None
+
+    # Calculate this month average
+    this_month_avg = db.execute('SELECT avg(weight) AS avg_weight FROM weights WHERE user_id = ? AND date BETWEEN ? AND ?;',
+                                session['user_id'],
+                                f'{this_year}-{this_month:02d}-01',
+                                f'{this_year}-{this_month:02d}-31')
+    avg_current = this_month_avg[0]['avg_weight'] if this_month_avg else None
+
+    return render_template('index.html', weights=weights, avg_last=avg_last, avg_current=avg_current)
 
 
 @app.route("/add", methods=["GET", "POST"])
