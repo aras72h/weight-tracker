@@ -9,10 +9,10 @@
     {{ add() }}
     <div class="av- py-3">
         <div class="card p-3 mx-1">
-            <strong>Last Month's Average:</strong> {{ "{:.1f}".format(avg_last) }} kg
+            <strong>Last Month's Average:</strong> {{ avg_last }} kg
         </div>
         <div class="card p-3 mx-1">
-            <strong>This Month's Average:</strong> {{ "{:.1f}".format(avg_current) }} kg
+            <strong>This Month's Average:</strong> {{ avg_current }} kg
         </div>
     </div>
     {{ history_table(weights) }}

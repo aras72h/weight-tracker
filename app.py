@@ -51,14 +51,18 @@ def index():
                                 session['user_id'],
                                 date_start,
                                 date_end)
-    avg_last = last_month_avg[0]['avg_weight'] if last_month_avg else None
+    avg_last = last_month_avg[0]['avg_weight'] if last_month_avg[0]['avg_weight'] != None else 0
+    avg_last = "{:.1f}".format(avg_last)
 
     # Calculate this month average
     this_month_avg = db.execute('SELECT avg(weight) AS avg_weight FROM weights WHERE user_id = ? AND date BETWEEN ? AND ?;',
                                 session['user_id'],
                                 f'{this_year}-{this_month:02d}-01',
                                 f'{this_year}-{this_month:02d}-31')
-    avg_current = this_month_avg[0]['avg_weight'] if this_month_avg else None
+    avg_current = this_month_avg[0]['avg_weight'] if this_month_avg[0]['avg_weight'] != None else 0
+    avg_current = "{:.1f}".format(avg_current)
+
+    print(date_start, date_end)
 
     return render_template('index.html', weights=weights, avg_last=avg_last, avg_current=avg_current)
 
