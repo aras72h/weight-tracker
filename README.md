@@ -1,6 +1,6 @@
 # Weight Tracker
 
-#### Video Demo: <URL>
+#### Video Demo: https://youtu.be/bhj3ac6fzY4
 
 #### Description
 
