@@ -1,7 +1,5 @@
 # Weight Tracker
 
-#### Video Demo: https://youtu.be/bhj3ac6fzY4
-
 #### Description
 
 Weight Tracker is a web-based application designed to help you track your weight on a daily basis and calculate the monthly average. By monitoring your weight regularly, you can stay informed about your progress and make adjustments to your diet and exercise routine as needed.
